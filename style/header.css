@@ -1,5 +1,6 @@
 header{
   grid-template-columns: 10rem 73rem 12rem 5rem;
+  background: url("../media/starfield-banner.jpg") repeat;
 }
 header li{
 	display: inline;
@@ -11,6 +12,8 @@ header li+li{
 }
 #logo{
 	grid-row: 1 / 3;
+	
+	background: transparent;
 }
 /*#secondmenu{
 	grid-column: 2 / 4;
