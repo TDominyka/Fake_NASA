@@ -41,3 +41,26 @@ header li+li{
 	background-color: #555;
 }
 
+#search{
+	background-color: #333333;
+	padding: 0.8rem 0.3rem 0.8rem 0.3rem;
+	border: none;
+	z-index: -1;
+	margin-top: 0.7rem;
+	text-align: left;
+	font-size: 1rem;
+}
+
+#searchsubmit{
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABEElEQVRIie2TTWoCQRCFe9xGd+pJsvfnBkoOkixk4kJwdKOnMeg5YjyAnsGfCFmZLwvfQKM4VqshIHlQdM/MV/WKocq5uxRQBvrAB7BVTIEeULq2+BOw4bTWQPOa4t8qNAIqwIOiCrzp2w5ohBYve523MrhYzAoohhj0084N7FhsEmIwU1LFwNbETkMMPpWUN7AFsZtzbM7PM3fjXGQFfYOFzkdDXsrMQwwmOp8NBi86xwZ2L6CkJQKIM7i2mGXwVgNNLREaxRqQV9SBibfRnaDinklDS3RKS6DjPXcvMSkCCfCu8d3qnqS/5cA03MTQRHxgMvg3ucgkl5VoVRRFQ+fcq/fq6xZ1jwR0f2Wi/lQ/2mvMQ0czO9IAAAAASUVORK5CYII=") center center no-repeat;
+	border: none;
+	padding: 1rem 1rem;
+	position: absolute;
+	z-index: 1;
+	display: inline;
+	top: 1.2rem;
+	right: 16.5rem;
+}
+#share{
+	margin:1.5rem 0 0 0.5rem;
+}
