@@ -5,7 +5,7 @@
     grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
 }
 
-img {
+section img {
     width:100%; 
     height:100%
 }
