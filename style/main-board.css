@@ -1,7 +1,7 @@
 .grid-board {
     display: grid;
     grid-gap: 15px;
-    margin: auto 70px;
+    margin: 0.7em auto;
     grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
     aspect-ratio: 1;
 }
@@ -50,6 +50,19 @@ section img {
 #eighth-img {
     grid-column: 1;
     grid-row: 4;
+    position: relative;
+    z-index: -1;
+}
+
+#eighth-img #play{
+	position: absolute;
+	z-index: 1;
+	top: 43%;
+	right: 38%;
+	width: 7em;
+	background: transparent;
+	border: none;
+	opacity: 0.8;
 }
 
 #ninth-img {
