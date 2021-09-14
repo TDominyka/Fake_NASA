@@ -1,7 +1,6 @@
 .grid-board {
     display: grid;
     grid-gap: 15px;
-    margin: auto 70px;
     grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
     aspect-ratio: 1;
 }
