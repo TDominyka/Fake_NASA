@@ -1,19 +1,31 @@
 header{
-  grid-template-columns: 10% 73% 12% 5%;
+	margin-top: 1.5em;
+  grid-template-columns: 11% 73% 12% 4%;
+  background: url("../media/starfield-banner.jpg") repeat;
 }
-
+header ul{
+ 
+	text-align: right;
+	padding-right: 1em;
+	margin-top: 1.5em;
+}
 header li{
 	display: inline;
-	font-size: 1.3rem;
-	padding: 0 1rem 0 1rem;
+	font-size: 1.47em;
+	padding: 0.5em 0.7em 0.5em 0.7em;
+	/*padding-right: 1em;*/
 }
 
-header li+li{
-	border-left: 0.1rem solid #888;
+header li + li{
+	border-left: 0.1em solid #555555;
+	
 }
 
 #logo{
+	margin-top: 1.5em;
 	grid-row: 1 / 3;
+	
+	background: transparent;
 }
 
 /*#secondmenu{
@@ -22,29 +34,51 @@ header li+li{
 	padding: 0;
 	margin: 0;
 	
-	margin-right: 5rem;
+	margin-right: 5em;
 }
 #test{
-	padding: 0.5rem;
+	padding: 0.5em;
 	background-color: red;
 }*/
 
 #test {
 	grid-column: 2 / 4;
-	margin: 0 12% 1% 12%;
+	
 	background-color: #555;
 	padding: 0;
 }
 
 #test ul{
-	margin: 1rem 0 1rem 0;
 	padding: 0;
 	background-color: #555;
 }
 
 #test li{
-	font-size: 0.8rem;
-	padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+	font-size: 1em;
+	padding: 0.5em 0.8em 0.5em 0.8em;
 	background-color: #555;
 }
 
+#search{
+	background-color: #333333;
+	padding: 0.6em 0.3em 0.6em 0.3em;
+	border: none;
+	z-index: -1;
+	margin-top: 1.5em;
+	text-align: left;
+	font-size: 1em;
+}
+
+#searchsubmit{
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABEElEQVRIie2TTWoCQRCFe9xGd+pJsvfnBkoOkixk4kJwdKOnMeg5YjyAnsGfCFmZLwvfQKM4VqshIHlQdM/MV/WKocq5uxRQBvrAB7BVTIEeULq2+BOw4bTWQPOa4t8qNAIqwIOiCrzp2w5ohBYve523MrhYzAoohhj0084N7FhsEmIwU1LFwNbETkMMPpWUN7AFsZtzbM7PM3fjXGQFfYOFzkdDXsrMQwwmOp8NBi86xwZ2L6CkJQKIM7i2mGXwVgNNLREaxRqQV9SBibfRnaDinklDS3RKS6DjPXcvMSkCCfCu8d3qnqS/5cA03MTQRHxgMvg3ucgkl5VoVRRFQ+fcq/fq6xZ1jwR0f2Wi/lQ/2mvMQ0czO9IAAAAASUVORK5CYII=") center center no-repeat;
+	border: none;
+	padding: 1em 1em;
+	position: absolute;
+	z-index: 1;
+	display: inline;
+	top: 1.2em;
+	right: 16.5em;
+}
+#share{
+	margin:1.5em 0 0 0.5em;
+}

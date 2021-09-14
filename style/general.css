@@ -1,13 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
 *{
-	font-family: Tahoma, Helvetica, Arial;
-	background: #000000;
+	font-family: "Titillium Web", "Helvetica Neue", "Helvetica", Arial, sans-serif;
 	color: #ffffff;
 	text-align: center;
 }
+body{
+	margin: auto;
+	max-width: 1366px;
+	background: #000000;
+	font-size: 14px;
+}
 .grid-container {
   display: grid;
-  max-width: 100vw;
-  margin: auto;
+  /*max-width: 100vw;*/
   background-image: url('https://www.nasa.gov/sites/all/themes/custom/nasatwo/images/starfield-banner.jpg');
 }
 .grid-item {
@@ -16,9 +21,7 @@
   padding: 20px;
   font-size: 30px;*/
   
-  text-align: center;
+  
+	background: transparent;
 }
 
-html {
-  width: 100vw;
-}
