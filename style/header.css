@@ -1,6 +1,7 @@
 header{
 	margin-top: 1.5em;
   grid-template-columns: 11% 73% 12% 4%;
+  grid-template-rows: 70% 30%;
   background: url("../media/starfield-banner.jpg") repeat;
 }
 header ul{
@@ -42,21 +43,27 @@ header li + li{
 }*/
 
 #test {
+	height: 5em;
 	grid-column: 2 / 4;
-	
-	background-color: #555;
-	padding: 0;
+	/*margin-top:2em;
+	background-color: #555;*/
 }
 
 #test ul{
 	padding: 0;
+	margin-top:0.5em;
 	background-color: #555;
+	text-align: left;
+	margin-left:3em;
+	margin-right:6em;
+	padding:0.7em 0 0.7em 0;
 }
 
 #test li{
 	font-size: 1em;
-	padding: 0.5em 0.8em 0.5em 0.8em;
+	padding: 0em 1em 0em 1em;
 	background-color: #555;
+	border-color: #888;
 }
 
 #search{
@@ -67,6 +74,7 @@ header li + li{
 	margin-top: 1.5em;
 	text-align: left;
 	font-size: 1em;
+	width: 11em;
 }
 
 #searchsubmit{
@@ -75,10 +83,11 @@ header li + li{
 	padding: 1em 1em;
 	position: absolute;
 	z-index: 1;
-	display: inline;
-	top: 1.2em;
-	right: 16.5em;
+	/*display: inline;*/
+	top: 1.5em;
+	right: 1em;
 }
 #share{
-	margin:1.5em 0 0 0.5em;
+	margin:2em 0 0 0.5em;
+	width: 1.5em;
 }
