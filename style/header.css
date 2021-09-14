@@ -3,6 +3,9 @@ header{
   grid-template-columns: 11% 73% 12% 4%;
   grid-template-rows: 70% 30%;
   background: url("../media/starfield-banner.jpg") repeat;
+    position: -webkit-sticky;
+  position: sticky ;
+  top: 0;
 }
 header ul{
  
@@ -43,7 +46,7 @@ header li + li{
 }*/
 
 #test {
-	height: 5em;
+	height: 3.5em;
 	grid-column: 2 / 4;
 	/*margin-top:2em;
 	background-color: #555;*/
