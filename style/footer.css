@@ -14,8 +14,7 @@ footer p{
 	font-weight: bold;
 }
 footer ul{
-		text-align: right;
-
+	text-align: right;
 }
 footer li{
 	text-align: right;
@@ -26,7 +25,3 @@ footer li{
 footer li+li{
 	margin-left: 2.3em;
 }
-/*#footer-info{
-	display: block;
-	text-align: left;
-}*/

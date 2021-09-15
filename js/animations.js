@@ -1,15 +1,20 @@
 "use strict";
  
-setInterval(newsImg, 2500);
-var src=["style/images/orbital.jpg", "style/images/aeroplane.jpg", "style/images/plate.jpg"];
-var i=0;
+
+var slideIndex = 1;
+newsImg();
 
 function newsImg() {
-	document.getElementById("first-img").src = src[i];
-	if(i==2)
-		i=0;
-	else
-		i+=1;
+	var i;
+	var slides = document.getElementsByClassName("mySlides");
+	for (i = 0; i < slides.length; i++) {
+		slides[i].style.visibility = "hidden";
+	}
+	slideIndex++;
+	if (slideIndex > slides.length) {slideIndex = 1}
+	console.log(slideIndex);
+	slides[slideIndex-1].style.visibility = "visible";
+	setTimeout(newsImg, 30000); 
 }
 
 function playPause() { 
