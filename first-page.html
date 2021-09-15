@@ -38,26 +38,83 @@
 		</header>
 
 		<section id="main-board" class="grid-board">
-			<img id="first-img" src="style/images/orbital.jpg">
-			<img id="second-img" src="style/images/swarm.jpg">
-			<img id="third-img" src="style/images/mars.png">
-			<img id="fourth-img" src="style/images/spaceview.jpg">
-			<img id="fifth-img" src="style/images/supernova.png">
-			<img id="sixth-img" src="style/images/space_capsule.jpg">
-			<div id="seventh-img">
-				<video id="video" width="340" height= "500" controls> 
+			
+			<div id="first-cell" class="img-container">
+				<img id="first-img" src="style/images/orbital.jpg">
+				<p class="category">Tech</p>
+				<p class="img-description">Fuss Over 5G Connectivity</p>
+			</div>
+			
+			
+			<div id="second-cell" class="img-container">
+				<img id="second-img" src="style/images/swarm.jpg">
+				<p class="category">Tech</p>
+				<p class="img-description">Spudnik Returns</p>
+			</div>
+	
+			<div id="events-box">
+				NASA Events<hr>
+				First Event's Details.<br>
+				Second Event's Details.<br>
+				Third Event's Details.
+			</div>
+				
+			<div id="third-cell" class="img-container">
+				<img id="third-img" src="style/images/mars.png">
+				<p class="category">Tech</p>
+				<p class="img-description">Methane Is Still Flammable In The ISS</p>
+			</div>
+			
+			<div id="fourth-cell" class="img-container">
+				<img id="fourth-img" src="style/images/spaceview.jpg">
+				<p class="category">Tech</p>
+				<p class="img-description">New Spacesuits</p>
+			</div>
+			
+			<div id="fifth-cell" class="img-container">
+				<img id="fifth-img" src="style/images/car.jpeg">
+				<p class="category">Tech</p>
+				<p class="img-description">First Encounter With Alien Life</p>
+			</div>
+			
+
+			<div id="sixth-cell" class="img-container">
+				<img id="sixth-img" src="style/images/space_capsule.jpg">
+				<p class="category">Tech</p>
+				<p class="img-description">Racism In Mars?</p>
+			</div>
+			
+			<div id="seventh-cell">
+				<video id="video" poster="style/images/thumbnail.png" controls> 
 					<source src="media/Kate Rubins - Scientist in Space.mp4" type="video/mp4">
 					Your browser does not support HTML video.
-				</video>
-				<button onclick="playPause()" id="play">
-					<img id="play_butt_img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAD2ElEQVRoge2ZT2wUZRjGn3d2usqyUwOIAlusLcQ24bgEDp4gXiAxsQeCEUk8NKnrFmO8GpOaGM+K3S174WJJoDVRonLszQPYvUtjykbWhbR0D93JNt125vGwNTYzs50/+001ob/j+73fvM+z8+3M970D7LHH840oucoME/31xhnNxjlCshowTOAogPRWhkmgBuChgGWCc5Wl3geYELvb0l0ZOFFoHqfYeYDvE8iErFylLdO6pRX++DhVjaohkoGT1xuHLR1fAvgAQDJq8S1aAtzUE/x8Yaz3WdjJoQ0MFs33CH4L4GDYuT6sUDBeyRm3w0wKbCBbYk/dMosARkNLC4EQpQN6+lp5TDYC5QdJOlZi6kWr8T0hF7qTFwyS91q6cak2Jk2/XM0vIVtiz26KBwARufiCZd49NUPf/5evgbplFndT/DbeWntmfuOXtOMSGpwyr5CcVqcpPCTereSNO53GOxrITK4eSmryO4CXY1EWnHpPgkOdHrEdl1BSk6/w34sHgIMbtnzRadDTwMnrzT60X1KBmB3Zhzf7EhG0BYQYHSytveY15GnA1u1xhHjDZo8k8N3b++I0krQ3rZzXgNvABDUKr0SpEqcRTXgVM3Rd1GWg/0jjLIi+borFYYRAZmBlNeuMuwxoNs4pqQj1RgRy3hlzGRDK6a4rOVBlhBD/O2AL3ohcwQcFRoacAfcdaJ+kYiWyEbq1eT1G0x6xWIhgxHAGfDdz/3d0j5gJ9actT8pPLXz9Wwu/Vq2gUxrOgMsAgScSs4EIwtsInjhDLgMasUDBqejyOhNZ+L88dAbcd0A4D8hI1ApeKBAOACA574x5LCHOiaJ+lyrh/6AxMeeMuQxUlnofDLxiPgZwPGoh1cK3+HNxOVV2Bj12o2KTcitKhfJTC1d/WsOlH9ZUiwcht7xakV6PUeiWVrB061MEPBPcr7V/8fs1taK3sb4pWsFroONiHyw2pgh8GJeiUBCTj/LGNa+hjm/iVtL+DEDoXmUMrPToDHcmBoDq6Et1Cjxd7zK5nZq+O+6FKjnjthAl9ZoCU3j0kTG7U4LvZm7xcDovwI/qNAVFfulfSn/imxXkUsdKTCU3G7MicrF7YUGQn9cT+y8rae4CQG1Mmod04x0BbnQvzpdC/9L+kSDigQgfOF4vNC6LYBLqu3bLAPJ+a95J6ANNJW/cadkchqAIYD3sfA/WQUxuJO3hsOKBLj/y9U01M7ptj0u7ERZ27/SYkOlN0QrVXOqvqBrUbDsnqA28unpaIOe3Wh9DIDLY9pkVQBWCBZLzGhNzi8upsorPrHvs8bzzN6YVcIlux5q/AAAAAElFTkSuQmCC"/>
-				</button>
+				</video> -->
 			</div>
-			<img id="eighth-img" src="style/images/usa.jpg">
-			<img id="ninth-img" src="style/images/cachecam.png">
-			<img id="tenth-img" src="style/images/rocks.jpg">
+
+			<div id="eighth-cell" class="img-container">
+				<img id="eighth-img" src="style/images/usa.jpg">
+				<p class="category">Tech</p>
+				<p class="img-description">First Interplanetary Pet</p>
+			</div>
+			
+			<div id="ninth-cell" class="img-container">
+				<img id="ninth-img" src="style/images/cachecam.png">
+				<p class="category">Tech</p>
+				<p class="img-description">Neil Armstrong Was In Fact Russian</p>
+			</div>
+			
+			<div id="tenth-cell" class="img-container">
+				<img id="tenth-img" src="style/images/rocks.jpg">
+				<p class="category">Tech</p>
+				<p class="img-description">New Rocket That Runs On Electricity</p>
+			</div>
+
 		</section>
 		
+		<button id="more-stories">
+			MORE STORIES
+		</button>
+
 		<footer>	
 			<div id="footer-info">		
 				<img src="media/nasa-logo.svg" alt="NASA logo"></img>

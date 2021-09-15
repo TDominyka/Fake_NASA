@@ -1,7 +1,7 @@
 "use strict";
  
-setInterval(newsImg, 1000);
-var src=["https://www.nasa.gov/sites/default/files/thumbnails/image/orbital.jpg","media/nasa-logo.svg","media/share.svg"];
+setInterval(newsImg, 2500);
+var src=["style/images/orbital.jpg", "style/images/aeroplane.jpg", "style/images/plate.jpg"];
 var i=0;
 
 function newsImg() {
