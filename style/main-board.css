@@ -71,7 +71,7 @@ section img {
 .img-description:hover {
     height: 100%;
     opacity: 0.8;
-    transition: height 0.6s;
+    transition: height 0.7s;
     transition-timing-function: ease-in-out;
 }
 
