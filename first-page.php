@@ -1,15 +1,23 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 	<html>
 	<head>
 		<title>Fake NASA Page</title>
 		<meta charset="UTF-8">
 		<meta name="description" content="Fake NASA page for learning purposes">
 		<meta name="keywords" content="NASA, learning, HTML, CSS, JS, JavaScript">
-		<meta name="author" content="Dominyka Razanovaitė">
+		<meta name="author" content="Dominyka Razanovaitė and Parmenion Charistos">
 		<link rel="stylesheet" href="style/general.css">
 		<link rel="stylesheet" href="style/header.css">
 		<link rel="stylesheet" href="style/main-board.css">
 		<link rel="stylesheet" href="style/footer.css">
+		<?php
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				$news_file=$_POST["news_file"];
+			}else{
+				$news_file="media/Ass2News.json";
+			}
+			$news=json_decode(file_get_contents($news_file),true);
+		?>
 	</head>
 	<body>
 		<header class="grid-container"> 
@@ -63,19 +71,32 @@
 			</div>
 						
 			<div id="second-cell" class="img-container">
-				<img id="second-img" src="style/images/swarm.jpg">
+				<?php
+					echo "<img id=\"second-img\" src=\"".$news["news"]["0"]["imgurl"]. "\">";
+				?>
 				<p class="category">Tech</p>
 				<div class="img-description">
-					<h4>Spudnik Returns</h4>
+					<?php
+						echo "<h4>".$news["news"]["0"]["title"]. "</h4>";
+					?>
 				</div>
 			</div>
 	
 			<div id="events-box">
-				NASA Events<hr>
-				First Event's Details.<br>
-				Second Event's Details.<br>
-				Third Event's Details.
+				NASA Events<hr></hr>
+				<?php
+					echo $news["news"]["1"]["title"]. PHP_EOL;
+					echo $news["news"]["1"]["content"]. PHP_EOL;
+				?>
+				<!--First Event's Details.</br>
+				Second Event's Details.</br>
+				Third Event's Details.<hr id="bottom-line"></hr>
+				NASA TV Schedule Launches and Landings-->
+
+				
 			</div>
+			
+			
 				
 			<div id="third-cell" class="img-container">
 				<img id="third-img" src="style/images/mars.png">
@@ -94,13 +115,16 @@
 			</div>
 			
 			<div id="fifth-cell" class="img-container">
-				<img id="fifth-img" src="style/images/car.jpeg">
+				<?php
+					echo "<img id=\"fifth-img\" src=\"".$news["news"]["2"]["imgurl"]. "\">";
+				?>
 				<p class="category">Tech</p>
 				<div class="img-description">
-					<h4>First Encounter With Alien Life</h4>
-					<p  >More information about aliens and stuff.</p>
-					<p  >More information about aliens and stuff.</p>
-					<p  >More information about aliens and stuff.</p>
+					<?php
+						echo "<h4>".$news["news"]["2"]["title"]. "</h4>";
+						echo "<p>".$news["news"]["2"]["content"]. "</p>";
+
+					?>
 				</div>
 			</div>
 			
@@ -165,6 +189,7 @@
 				<li>Office of Special Counsel</li>
 				<li>Agency Financial Reports</li>
 				<li>Contact NASA</li>
+				<li><a href="admin.php">Admin page</a></li>
 			</ul>
 		</footer>
 	</body>
