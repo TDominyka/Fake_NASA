@@ -14,7 +14,7 @@ function newsImg() {
 	if (slideIndex > slides.length) {slideIndex = 1}
 	console.log(slideIndex);
 	slides[slideIndex-1].style.visibility = "visible";
-	setTimeout(newsImg, 30000); 
+	setTimeout(newsImg, 3000); 
 }
 
 function playPause() { 
