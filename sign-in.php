@@ -1,3 +1,15 @@
+<?php
+	function if_exists($name,$pass){
+		$users=json_decode(file_get_contents("users.json"),true);
+		foreach($users["admins"] as $admin){
+			echo password_hash($admin["password"], PASSWORD_DEFAULT) . PHP_EOL;
+			if($admin["username"]==$name && password_verify($pass,$admin["password"])){
+				return true;
+			}
+		}
+		return false;
+	}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,11 +20,11 @@
 	</head>
 	<body>
 		<?php
-			//needs checking if this user exists.
-			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			if ($_SERVER["REQUEST_METHOD"] == "POST" && if_exists($_POST["username"],$_POST["password"])) {
 				session_start();
 				$_SESSION['loggedin'] = true;
 				$_SESSION['username'] = $_POST["username"];
+				$_SESSION['password'] = "";
 				echo "<script type=\"text/javascript\">
 						window.location = \"admin.php\"
 						</script>";
@@ -26,7 +38,7 @@
 				<input class="grid-item" type="text" name="username" id="username" placeholder="e.g. IamMrNimbus"></input>
 				<label class="grid-item" for="password" id="password-label">Password</label>
 				<input class="grid-item" type="password" name="password" id="password" placeholder="e.g. NotYourBirthDate"></input>
-				<input class="grid-item" type="submit" id="submit-button"></input>
+				<input class="grid-item" type="submit" value="Sign in" id="submit-button"></input>
 			</div>
 		</form>
 	</body>
