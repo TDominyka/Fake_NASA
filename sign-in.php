@@ -14,7 +14,7 @@
 				$_SESSION['loggedin'] = true;
 				$_SESSION['username'] = $_POST["username"];
 				echo "<script type=\"text/javascript\">
-						window.location = \"admin.php/\"
+						window.location = \"admin.php\"
 						</script>";
 			}
 		?>
