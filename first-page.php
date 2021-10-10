@@ -1,3 +1,11 @@
+<?php
+	
+		$pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'dominyka', 'fliperis'); //connecting to db
+		$statement = $pdo->query("SELECT COUNT(*) as ids FROM news"); 
+		$row = $statement->fetch(PDO::FETCH_ASSOC);
+		$news_id=$row["ids"];
+?>
+
 <!DOCTYPE html>
 	<html>
 	<head>
@@ -11,13 +19,39 @@
 		<link rel="stylesheet" href="style/main-board.css">
 		<link rel="stylesheet" href="style/footer.css">
 		<?php
-			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				$news_file=$_POST["news_file"];
-			}else{
-				$news_file="media/Ass2News.json";
+		function getNews($data,$id){
+			try{
+				$pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'dominyka', 'fliperis'); //connecting to db
+				$statement = $pdo->query("SELECT title, description, category FROM news WHERE news_id=$id"); 
+				$row = $statement->fetch(PDO::FETCH_ASSOC);
+				switch($data){
+					case "title":
+						return htmlentities($row['title']);
+					case "content":
+						return htmlentities($row['description']);
+					case "category":
+						return htmlentities($row['category']);
+					case "image";
+						return getImage($id);
+				}
+			
+			}catch(PDOException $e) {
+				echo "<script>console.log('ERROR: ". $e->getMessage() . "' );</script>";
 			}
-			$news=json_decode(file_get_contents($news_file),true);
+			return false;
+		}
+		
+		function getImage($id){
+			$pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'dominyka', 'fliperis'); //connecting to db
+			$sql = "SELECT image FROM news WHERE news_id=$id";
+			$query = $pdo->prepare($sql);
+			$query->execute();
+			$query->bindColumn(1, $image, PDO::PARAM_LOB);
+			$query->fetch(PDO::FETCH_BOUND);
+			return $image;
+		}
 		?>
+		
 	</head>
 	<body>
 		<header class="grid-container"> 
@@ -47,51 +81,55 @@
 		<section id="main-board" class="grid-board">
 			
 			<div class="first-cell img-container mySlides">
-				<img src="style/images/orbital.jpg">
-				<p class="category">Tech</p>
-				<div class="img-description">
-					<h4 id="carousel-text">NASA Invites Media to Kennedy for Artemis Activities</h4>
-				</div>
+				<?php
+					echo "<img src=\"data:image/jpg;base64,".base64_encode( getNews("image",$news_id) )."\"/>";
+					echo "<p class=\"category\">".getNews("category",$news_id)."</p>";
+					echo "<div class=\"img-description\">
+							<h4 id=\"carousel-text\">".getNews("title",$news_id)."</h4>
+							<p>".getNews("content",$news_id--). "</p>
+						</div>";
+				?>
 			</div>
 			
 			<div class="first-cell img-container mySlides">
-				<img src="style/images/aeroplane.jpg">
-				<p class="category">Tech</p>
-				<div class="img-description">
-					<h4 id="carousel-text">NASA Innovations Will Help U.S. Meet Sustainable Aviation Goals</h4>
-				</div>
+				<?php
+					echo "<img src=\"data:image/jpg;base64,".base64_encode( getNews("image",$news_id) )."\"/>";
+					echo "<p class=\"category\">".getNews("category",$news_id)."</p>";
+					echo "<div class=\"img-description\">
+							<h4 id=\"carousel-text\">".getNews("title",$news_id)."</h4>
+							<p>".getNews("content",$news_id--). "</p>
+						</div>";
+				?>
 			</div>
 			
 			<div class="first-cell img-container mySlides">
-				<img src="style/images/plate.jpg">
-				<p class="category">Tech</p>
-				<div class="img-description">
-					<h4 id="carousel-text">Fuss Over 5G Connectivity</h4>
-				</div>
+				<?php
+					echo "<img src=\"data:image/jpg;base64,".base64_encode( getNews("image",$news_id) )."\"/>";
+					echo "<p class=\"category\">".getNews("category",$news_id)."</p>";
+					echo "<div class=\"img-description\">
+							<h4 id=\"carousel-text\">".getNews("title",$news_id)."</h4>
+							<p>".getNews("content",$news_id--). "</p>
+						</div>";
+				?>
 			</div>
 						
 			<div id="second-cell" class="img-container">
 				<?php
-					echo "<img id=\"second-img\" src=\"".$news["news"]["0"]["imgurl"]. "\">";
+					echo "<img id=\"second-img\" src=\"data:image/jpg;base64,".base64_encode( getNews("image",$news_id) )."\"/>";
+					echo "<p class=\"category\">".getNews("category",$news_id)."</p>";
+					echo "<div class=\"img-description\">
+							<h4>".getNews("title",$news_id)."</h4>
+							<p>".getNews("content",$news_id--). "</p>
+						</div>";
 				?>
-				<p class="category">Tech</p>
-				<div class="img-description">
-					<?php
-						echo "<h4>".$news["news"]["0"]["title"]. "</h4>";
-					?>
-				</div>
 			</div>
 	
 			<div id="events-box">
 				NASA Events<hr></hr>
 				<?php
-					echo $news["news"]["1"]["title"]. PHP_EOL;
-					echo $news["news"]["1"]["content"]. PHP_EOL;
+					echo getNews("title",$news_id). PHP_EOL;
+					echo getNews("content",$news_id--). PHP_EOL;
 				?>
-				<!--First Event's Details.</br>
-				Second Event's Details.</br>
-				Third Event's Details.<hr id="bottom-line"></hr>
-				NASA TV Schedule Launches and Landings-->
 
 				
 			</div>
@@ -99,42 +137,49 @@
 			
 				
 			<div id="third-cell" class="img-container">
-				<img id="third-img" src="style/images/mars.png">
-				<p class="category">Tech</p>
-				<div class="img-description">
-					<h4>Methane Is Still Flammable In The ISS</h4>
-				</div>
+				<?php
+					echo "<img id=\"third-img\" src=\"data:image/jpg;base64,".base64_encode( getNews("image",$news_id) )."\"/>";
+					echo "<p class=\"category\">".getNews("category",$news_id)."</p>";
+					echo "<div class=\"img-description\">
+							<h4>".getNews("title",$news_id)."</h4>
+							<p>".getNews("content",$news_id--). "</p>
+						</div>";
+				?>
 			</div>
 			
 			<div id="fourth-cell" class="img-container">
-				<img id="fourth-img" src="style/images/spaceview.jpg">
-				<p class="category">Tech</p>
-				<div class="img-description">
-					<h4>New Spacesuits</h4>
-				</div>
+				<?php
+					echo "<img id=\"fourth-img\" src=\"data:image/jpg;base64,".base64_encode( getNews("image",$news_id) )."\"/>";
+					echo "<p class=\"category\">".getNews("category",$news_id)."</p>";
+					echo "<div class=\"img-description\">
+							<h4>".getNews("title",$news_id)."</h4>
+							<p>".getNews("content",$news_id--). "</p>
+						</div>";
+				?>
 			</div>
 			
 			<div id="fifth-cell" class="img-container">
 				<?php
-					echo "<img id=\"fifth-img\" src=\"".$news["news"]["2"]["imgurl"]. "\">";
+					echo "<img id=\"fifth-img\" src=\"data:image/jpg;base64,".base64_encode( getNews("image",$news_id) )."\"/>";
+					echo "<p class=\"category\">".getNews("category",$news_id)."</p>";
+					echo "<div class=\"img-description\">
+							<h4>".getNews("title",$news_id)."</h4>
+							<p>".getNews("content",$news_id--). "</p>
+						</div>";
 				?>
-				<p class="category">Tech</p>
-				<div class="img-description">
-					<?php
-						echo "<h4>".$news["news"]["2"]["title"]. "</h4>";
-						echo "<p>".$news["news"]["2"]["content"]. "</p>";
-
-					?>
 				</div>
 			</div>
 			
 
 			<div id="sixth-cell" class="img-container">
-				<img id="sixth-img" src="style/images/space_capsule.jpg">
-				<p class="category">Tech</p>
-				<div class="img-description">
-					<h4>Racism In Mars?</h4>
-				</div>
+				<?php
+					echo "<img id=\"sixth-img\" src=\"data:image/jpg;base64,".base64_encode( getNews("image",$news_id) )."\"/>";
+					echo "<p class=\"category\">".getNews("category",$news_id)."</p>";
+					echo "<div class=\"img-description\">
+							<h4>".getNews("title",$news_id)."</h4>
+							<p>".getNews("content",$news_id--). "</p>
+						</div>";
+				?>
 			</div>
 			
 			<div id="seventh-cell" class="img-container">
@@ -148,27 +193,36 @@
 			</div>
 
 			<div id="eighth-cell" class="img-container">
-				<img id="eighth-img" src="style/images/usa.jpg">
-				<p class="category">Tech</p>
-				<div class="img-description">
-					<h4>First Interplanetary Pet</h4>
-				</div>
+				<?php
+					echo "<img id=\"eighth-img\" src=\"data:image/jpg;base64,".base64_encode( getNews("image",$news_id) )."\"/>";
+					echo "<p class=\"category\">".getNews("category",$news_id)."</p>";
+					echo "<div class=\"img-description\">
+							<h4>".getNews("title",$news_id)."</h4>
+							<p>".getNews("content",$news_id--). "</p>
+						</div>";
+				?>
 			</div>
 			
 			<div id="ninth-cell" class="img-container">
-				<img id="ninth-img" src="style/images/cachecam.png">
-				<p class="category">Tech</p>
-				<div class="img-description">
-					<h4>Neil Armstrong Was In Fact Russian</h4>
-				</div>
+				<?php
+					echo "<img id=\"ninth-img\" src=\"data:image/jpg;base64,".base64_encode( getNews("image",$news_id) )."\"/>";
+					echo "<p class=\"category\">".getNews("category",$news_id)."</p>";
+					echo "<div class=\"img-description\">
+							<h4>".getNews("title",$news_id)."</h4>
+							<p>".getNews("content",$news_id--). "</p>
+						</div>";
+				?>
 			</div>
 			
 			<div id="tenth-cell" class="img-container">
-				<img id="tenth-img" src="style/images/rocks.jpg">
-				<p class="category">Tech</p>
-				<div class="img-description">
-					<h4>New Rocket That Runs On Electricity</h4>
-				</div>
+				<?php
+					echo "<img id=\"tenth-img\" src=\"data:image/jpg;base64,".base64_encode( getNews("image",$news_id) )."\"/>";
+					echo "<p class=\"category\">".getNews("category",$news_id)."</p>";
+					echo "<div class=\"img-description\">
+							<h4>".getNews("title",$news_id)."</h4>
+							<p>".getNews("content",$news_id--). "</p>
+						</div>";
+				?>
 			</div>
 		</section>
 		

@@ -1,14 +1,49 @@
 <?php
 	function if_exists($name,$pass){
-		$users=json_decode(file_get_contents("users.json"),true);
+		try{
+			$pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'dominyka', 'fliperis'); //connecting to db
+			$statement = $pdo->query("SELECT username, user_password FROM users"); 
+			$row = $statement->fetch(PDO::FETCH_ASSOC); //returns one row at a time
+			while($row!=""){
+				if(htmlentities($row['username'])==$name && password_verify($pass,htmlentities($row['user_password']))){
+					return true;
+				}
+				$row = $statement->fetch(PDO::FETCH_ASSOC);
+			}
+		}catch(PDOException $e) {
+			echo "<script>console.log('ERROR: ". $e->getMessage() . "' );</script>";
+		}
+		
+		//an old way with json file
+		
+		/*$users=json_decode(file_get_contents("users.json"),true);
 		foreach($users["admins"] as $admin){
 			echo password_hash($admin["password"], PASSWORD_DEFAULT) . PHP_EOL;
 			if($admin["username"]==$name && password_verify($pass,$admin["password"])){
 				return true;
 			}
-		}
+		}*/ 
+		
 		return false;
 	}
+	function register($name,$pass){
+		try{
+			$pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'dominyka', 'fliperis');
+			$password=password_hash($pass, PASSWORD_DEFAULT);
+			$query="insert into users(user_role, username, user_password) values('admin', '". $name ."','". $password."')";
+			$pdo->exec($query); 
+		}catch(PDOException $e) {
+			echo "<script>console.log('ERROR: ". $e->getMessage() . "' );</script>";
+		}
+		
+	}
+?>
+<?php	
+			session_start();
+			if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+				header("Location: admin.php");
+				die();	
+			}
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,14 +55,18 @@
 	</head>
 	<body>
 		<?php
-			if ($_SERVER["REQUEST_METHOD"] == "POST" && if_exists($_POST["username"],$_POST["password"])) {
-				session_start();
-				$_SESSION['loggedin'] = true;
-				$_SESSION['username'] = $_POST["username"];
-				$_SESSION['password'] = "";
-				echo "<script type=\"text/javascript\">
-						window.location = \"admin.php\"
-						</script>";
+			if ($_SERVER["REQUEST_METHOD"] == "POST"){
+				if ($_POST["submit"] == "Sign in" && if_exists($_POST["username"],$_POST["password"])) {
+					session_start();
+					$_SESSION['loggedin'] = true;
+					$_SESSION['username'] = $_POST["username"];
+					$_POST['password'] = "";
+					echo "<script type=\"text/javascript\">
+							window.location = \"admin.php\"
+							</script>";
+				}elseif($_POST["submit"] == "Register" && !if_exists($_POST["username"],$_POST["password"])){
+					register($_POST["username"],$_POST["password"]);
+				}
 			}
 		?>
 		<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
@@ -38,7 +77,8 @@
 				<input class="grid-item" type="text" name="username" id="username" placeholder="e.g. IamMrNimbus"></input>
 				<label class="grid-item" for="password" id="password-label">Password</label>
 				<input class="grid-item" type="password" name="password" id="password" placeholder="e.g. NotYourBirthDate"></input>
-				<input class="grid-item" type="submit" value="Sign in" id="submit-button"></input>
+				<input class="grid-item button" type="submit" name="submit" value="Sign in" id="sign_in-button"></input>
+				<input class="grid-item button" type="submit" name="submit" value="Register" id="register-button"></input>
 			</div>
 		</form>
 	</body>

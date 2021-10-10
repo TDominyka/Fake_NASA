@@ -111,9 +111,16 @@ html {
     color: black;
 }
 
-#submit-button {
+#sign_in-button{
     grid-row: 5;
     grid-column: 2;
+}
+#register-button{
+    grid-row: 6;
+    grid-column: 2;
+}
+
+.button {
     width: 60%;
     text-align: center;
     color: white;
@@ -129,7 +136,7 @@ html {
     }
 }
 
-#submit-button:hover {
+.button:hover {
     background-image: url("../media/starfield-banner.jpg");
     background-position: 0px 0px;
     background-repeat: repeat-x;
