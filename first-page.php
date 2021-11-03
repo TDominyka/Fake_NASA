@@ -1,6 +1,5 @@
 <?php
-	
-		$pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'dominyka', 'fliperis'); //connecting to db
+		$pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'root', ''); // $pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'dominyka', 'fliperis'); //connecting to db
 		$statement = $pdo->query("SELECT COUNT(*) as ids FROM news"); 
 		$row = $statement->fetch(PDO::FETCH_ASSOC);
 		$news_id=$row["ids"];
@@ -21,7 +20,7 @@
 		<?php
 		function getNews($data,$id){
 			try{
-				$pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'dominyka', 'fliperis'); //connecting to db
+				$pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'root', ''); // $pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'dominyka', 'fliperis'); //connecting to db
 				$statement = $pdo->query("SELECT title, description, category FROM news WHERE news_id=$id"); 
 				$row = $statement->fetch(PDO::FETCH_ASSOC);
 				switch($data){
@@ -35,14 +34,14 @@
 						return getImage($id);
 				}
 			
-			}catch(PDOException $e) {
+			} catch(PDOException $e) {
 				echo "<script>console.log('ERROR: ". $e->getMessage() . "' );</script>";
 			}
 			return false;
 		}
 		
 		function getImage($id){
-			$pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'dominyka', 'fliperis'); //connecting to db
+			$pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'root', ''); // $pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'dominyka', 'fliperis'); //connecting to db
 			$sql = "SELECT image FROM news WHERE news_id=$id";
 			$query = $pdo->prepare($sql);
 			$query->execute();
@@ -65,12 +64,19 @@
 				<li>About</li>
 				<li>NASA Audiences</li>
 			</ul>
-			<form class="grid-item">
-				<input id="search" type="text" placeholder="Search"></input>
+			<form class="grid-item dropdown">
+				<input id="search" type="text" placeholder="Search" onkeyup="suggest(this.value)"> </input>
 				<input id="searchsubmit" type="submit" value=""></input>
+				<div id="dd-menu" class="dropdown-menu">
+					<a id="first-suggestion" href="#"></a>
+					<a id="second-suggestion" href="#"></a>
+					<a id="third-suggestion" href="#"></a>
+					<a id="fourth-suggestion" href="#"></a>
+					<a id="fifth-suggestion" href="#"></a>
+				</div>
 			</form>
 
-			<img id="share" class="grid-item" src="media/share.svg" alt="Button for shareing on social media"></img>
+			<img id="share" class="grid-item" src="media/share.svg" alt="Button for sharing on social media"></img>
 			<div class="grid-item" id="secondmenu">
 				<ul>
 					<li>International Space Station</li><li>Journey to Mars</li><li>Earth</li><li>Technology</li><li>Aeronautics</li><li>Solar System and Beyond</li><li>Education</li><li>History</li><li>Benefits to You</li>
@@ -79,28 +85,6 @@
 		</header>
 
 		<section id="main-board" class="grid-board">
-			
-			<div class="first-cell img-container mySlides">
-				<?php
-					echo "<img src=\"data:image/jpg;base64,".base64_encode( getNews("image",$news_id) )."\"/>";
-					echo "<p class=\"category\">".getNews("category",$news_id)."</p>";
-					echo "<div class=\"img-description\">
-							<h4 id=\"carousel-text\">".getNews("title",$news_id)."</h4>
-							<p>".getNews("content",$news_id--). "</p>
-						</div>";
-				?>
-			</div>
-			
-			<div class="first-cell img-container mySlides">
-				<?php
-					echo "<img src=\"data:image/jpg;base64,".base64_encode( getNews("image",$news_id) )."\"/>";
-					echo "<p class=\"category\">".getNews("category",$news_id)."</p>";
-					echo "<div class=\"img-description\">
-							<h4 id=\"carousel-text\">".getNews("title",$news_id)."</h4>
-							<p>".getNews("content",$news_id--). "</p>
-						</div>";
-				?>
-			</div>
 			
 			<div class="first-cell img-container mySlides">
 				<?php
@@ -130,11 +114,7 @@
 					echo getNews("title",$news_id). PHP_EOL;
 					echo getNews("content",$news_id--). PHP_EOL;
 				?>
-
-				
 			</div>
-			
-			
 				
 			<div id="third-cell" class="img-container">
 				<?php
@@ -248,5 +228,42 @@
 		</footer>
 	</body>
 		<script type="text/javascript" src="js/animations.js"></script>
+		<script>
+			function suggest(str) {
+				var nodes = document.getElementById("dd-menu").children;
+				//If the search bar is empty, exit the function.
+				if (str.length==0) {
+					document.getElementById("search").innerHTML="";
+					document.getElementById("search").style.border="0px";
+					for (let i = 0; i < nodes.length; i++) {
+						nodes[i].innerHTML = "";
+					}
+					return;
+				}
+
+				
+				//Send the search bar's content to the server.
+				var xmlhttp=new XMLHttpRequest();
+				xmlhttp.responseType = 'json';
+
+				xmlhttp.open("GET","search.php?q="+str,true);
+
+				xmlhttp.onload = function() {
+					if (this.readyState === this.DONE && this.status === 200) {
+						if (this.response !== null )
+							for (let i = 0; i < this.response.length; i++) {
+								nodes[i].innerHTML = this.response[i].substr(0,20) + "..<br>";
+						} 
+						else {
+							for (let i = 0; i < nodes.length; i++) {
+								nodes[i].innerHTML = "";
+							}
+						}
+					}
+				};
+							
+				xmlhttp.send();
+			}
+		</script>
 	</html>
 </DOCTYPE>

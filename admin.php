@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="style/admin.css">
 		<?php
 			if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["title"]!="") {				
-				$pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'dominyka', 'fliperis'); //connecting to db
+				$pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'root', ''); // $pdo = new PDO('mysql:host=localhost;dbname=demo_nasa', 'dominyka', 'fliperis'); //connecting to db
 				$img_file=addslashes(file_get_contents($_FILES['image_file']['tmp_name']));
 				$query = "INSERT INTO news (category, title, description, image) VALUES('".$_POST["category"]."','".$_POST["title"]."','". $_POST["content"]."','$img_file')"; 
 				$rows=$pdo -> exec($query);
